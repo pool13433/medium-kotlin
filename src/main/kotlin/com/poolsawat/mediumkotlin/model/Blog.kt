@@ -18,10 +18,10 @@ open class Blog {
     var id: Long? = null;
 
     @Column(name = "title")
-    lateinit var title: String
+    var title: String? =null
 
     @Column(name = "content")
-    lateinit var content: String
+    var content: String? = null
 
     @Column(name = "post_date",updatable = false,insertable = false)
     @JsonFormat(pattern = "dd::MM::yyyy")

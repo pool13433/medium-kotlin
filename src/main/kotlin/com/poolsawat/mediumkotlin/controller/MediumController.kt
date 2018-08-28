@@ -11,8 +11,6 @@ import java.util.*
 @RestController
 class MediumController {
 
-    //private val logger = LoggerFactory.getLogger(this.javaClass)
-
     @Autowired
     lateinit var repository : BlogRepository
 
@@ -21,7 +19,7 @@ class MediumController {
 
 
     @RequestMapping("/save")
-    fun process(): String{
+    fun save(): String{
         repository.save(Blog(1, "MomentJs", "What is MomentJs?", LocalDateTime.now(),true))
         repository.save(Blog(2, "AspectJ", "What is Aspectj ?", LocalDateTime.now(),false))
         repository.save(Blog(3, "Jpa", "What is Jpa?", LocalDateTime.now(),true))
@@ -31,17 +29,17 @@ class MediumController {
     }
 
     @RequestMapping("/findall")
-    fun findAll(): MutableList<Blog> {
+    fun findAll(): Iterable<Blog> {
         return repository.findAll()
     }
 
     @RequestMapping("/find/id/{id}")
-    fun findById(@PathVariable("id") id: Int): Optional<Blog> {
-        return repository.findById(id);
+    fun findById(@PathVariable("id") id: Long): Blog {
+        return repository.findById(id).get()
     }
 
     @RequestMapping("/find/title/{title}")
-    fun fetchDataByLastName(@PathVariable("title") title: String): List<Blog> {
+    fun fetchDataByTitle(@PathVariable("title") title: String): Blog {
         return repository.findByTitle(title)
     }
 
